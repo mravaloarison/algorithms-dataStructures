@@ -15,5 +15,5 @@ function palindrome(str) {
     // output the result of compairing newStr and reverseStr
     return newStr === reverseStr.join("");
 }
-  
+
 console.log(palindrome("A man, a plan, a canal. Panama"));
