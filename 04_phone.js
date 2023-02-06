@@ -3,8 +3,8 @@ function telephoneCheck(str) {
         The program would look for the pattern first, 
             - if the number inserted looks like a phone pattern, 
                 - then it will check if it starts with one or not,
-                    - if yes and the length is 11 then return true, if the length is more or less it will return false
-                    - else it will just look at the length if it is 10, then return true if so and return false otherwise
+                    - if yes and the length is 11 then return true
+                    - else check if length is 10, then return true if so
 
             - else, it will return false instantly
     */
@@ -24,11 +24,9 @@ function telephoneCheck(str) {
       '**********'
     ]
   
-    // insert into an array the format of the str inserted
+    /* transform all int found into a star */
     for (let i in str) {
-      !parseInt(str[i]) ?
-      pattern.push(str[i]) :
-      pattern.push('*')
+        !parseInt(str[i]) ? pattern.push(str[i]) : pattern.push('*')
     }
   
   
@@ -42,16 +40,17 @@ function telephoneCheck(str) {
   
     // conditions if the patterns match
     if (pattern_met > 0) {
-      if (phone_number.length == 11 && phone_number[0] == 1) {
-        return true;
-      } else if (phone_number.length == 10) {
-        return true;
-      } 
-      else return false;
+
+        // does it star with one and the length is 11?
+        if (phone_number.length == 11 && phone_number[0] == 1) return true;
+
+        // or does the length eqaul to 10
+        else if (phone_number.length == 10) return true;
+        
+        // doesn't match any of the above
+        else return false;
     }
-    else {
-      return false;
-    }
+    else return false;
   
   }
   
