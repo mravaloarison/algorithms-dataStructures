@@ -1,6 +1,6 @@
-let arrOfChange = [50, 20, 10, 5, 2 , 1, .50, .25, .10, .05, .01];
+let arrOfChange = [20, 10, 5 , 1, .50, .25, .10, .05, .01];
 
-let amount_paid = 98.38;
+let amount_paid = 96.74;
 
 let changes = [];
 let count = 0;
