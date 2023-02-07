@@ -1,21 +1,27 @@
 function checkCashRegister(price, cash, cid) {
-  let change = cash - price;
-  let newCid = [];
+  let changeDue = cash - price;
+  let idealCid = [];
+  let availableChange = cid.reduce((a,item) => a + item[1], 0);
+  let arrOfChange = [["ONE HUNDRED",100],["TWENTY",20], ["TEN",10], ["FIVE",5] , ["ONE",1], ["QUARTER",.25], ["DIME",.10], ["NICKEL",.05], ["PENNY",.01]];
 
-  decompose(change)
+
+  if (availableChange.toFixed(2) < changeDue) {
+    return {status: "INSUFFICIENT_FUNDS", change: []}
+  }
+
+  decompose(changeDue, arrOfChange)
   .map(item => {
-    newCid.push([item.curencyUnit[0], item.curencyUnit[1] * item.amount])
-  })
+    idealCid.push([item.curencyUnit[0], item.amount * item.curencyUnit[1] ])
+  });
 
-  return newCid;
+  return {status: "OPEN", change: idealCid};
 }
-  
-  
-function decompose(change) {
-  let arrOfChange = [["ONE HUNDRED", 100], ["TWENTY",20], ["TEN",10], ["FIVE",5] , ["ONE",1], ["QUARTER",.25], ["DIME",.10], ["NICKEL",.05], ["PENNY",.01]];
-  let changeDue   = change.toFixed(2);
-  let changes     = [];
-  let count       = 0;
+
+
+function decompose(change, arrOfChange) {
+  let changeDue = change.toFixed(2);
+  let changes   = [];
+  let count     = 0;
 
   let i = 0;
   while (changeDue >= 0) {
@@ -38,5 +44,5 @@ function decompose(change) {
 
   return changes.filter(item => item.amount > 0);
 }
-  
-  console.log(checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
+
+console.log(checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
